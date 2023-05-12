@@ -1,0 +1,141 @@
+﻿@model DepositBankingWebApp.Models.Deposit
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var user = await UserManager.GetUserAsync(User);
+    string userId = ""+user?.Id;
+}
+
+<h1>Create</h1>
+
+<h4>Deposit</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsStandardTermDeposit" /> @Html.DisplayNameFor(model => model.IsStandardTermDeposit)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsInterestFixed" /> @Html.DisplayNameFor(model => model.IsInterestFixed)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="TimeDeposit" /> @Html.DisplayNameFor(model => model.TimeDeposit)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="OverdraftPossability" /> @Html.DisplayNameFor(model => model.OverdraftPossability)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="CreditPossability" /> @Html.DisplayNameFor(model => model.CreditPossability)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="MonthlyCompounding" /> @Html.DisplayNameFor(model => model.MonthlyCompounding)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="TerminalCapitalization" /> @Html.DisplayNameFor(model => model.TerminalCapitalization)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="ValidForClientsOnly" /> @Html.DisplayNameFor(model => model.ValidForClientsOnly)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="CurrencyType" class="control-label"></label>
+                <select asp-for="CurrencyType" class="form-control" asp-items="Html.GetEnumSelectList<CurrencyType>()"></select>
+                <span asp-validation-for="CurrencyType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="InterestPaymentType" class="control-label"></label>
+                <select asp-for="InterestPaymentType" class="form-control" asp-items="Html.GetEnumSelectList<InterestPaymentType>()"></select>
+                <span asp-validation-for="InterestPaymentType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OwnershipType" class="control-label"></label>
+                <select asp-for="OwnershipType" class="form-control" asp-items="Html.GetEnumSelectList<OwnershipType>()"></select>
+                <span asp-validation-for="OwnershipType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EffectiveAnnualInterestRate" class="control-label"></label>
+                <input asp-for="EffectiveAnnualInterestRate" class="form-control" />
+                <span asp-validation-for="EffectiveAnnualInterestRate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WebLinkToOffer" class="control-label"></label>
+                <input asp-for="WebLinkToOffer" class="form-control" />
+                <span asp-validation-for="WebLinkToOffer" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DescriptionOfNegotiatedInterestRate" class="control-label"></label>
+                <input asp-for="DescriptionOfNegotiatedInterestRate" class="form-control" />
+                <span asp-validation-for="DescriptionOfNegotiatedInterestRate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MinSum" class="control-label"></label>
+                <input asp-for="MinSum" class="form-control" />
+                <span asp-validation-for="MinSum" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MinSumDescription" class="control-label"></label>
+                <input asp-for="MinSumDescription" class="form-control" />
+                <span asp-validation-for="MinSumDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MinDuration" class="control-label"></label>
+                <input asp-for="MinDuration" class="form-control" />
+                <span asp-validation-for="MinDuration" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaxSum" class="control-label"></label>
+                <input asp-for="MaxSum" class="form-control" />
+                <span asp-validation-for="MaxSum" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaxSumDescription" class="control-label"></label>
+                <input asp-for="MaxSumDescription" class="form-control" />
+                <span asp-validation-for="MaxSumDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaxDuration" class="control-label"></label>
+                <input asp-for="MaxDuration" class="form-control" />
+                <span asp-validation-for="MaxDuration" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DurationDescription" class="control-label"></label>
+                <input asp-for="DurationDescription" class="form-control" />
+                <span asp-validation-for="DurationDescription" class="text-danger"></span>
+            </div>
+            
+            <input type="hidden" asp-for="ApplicationUserId" value=@userId />
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
